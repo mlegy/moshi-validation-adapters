@@ -53,7 +53,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.fromJson("{\"string\": \"\"}")
             }
-            assertEquals("empty field found at path \$.string", exception.message)
+            assertEquals("unexpected empty field found at path \$.string", exception.message)
         }
 
         @Test
@@ -62,7 +62,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.toJson(NonEmptyString(string = ""))
             }
-            assertEquals("empty field found at path \$.string", exception.message)
+            assertEquals("unexpected empty field found at path \$.string", exception.message)
         }
     }
 
@@ -89,7 +89,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.fromJson("{\"list\": []}")
             }
-            assertEquals("empty field found at path \$.list", exception.message)
+            assertEquals("unexpected empty field found at path \$.list", exception.message)
         }
 
         @Test
@@ -98,7 +98,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.toJson(NonEmptyList(list = emptyList()))
             }
-            assertEquals("empty field found at path \$.list", exception.message)
+            assertEquals("unexpected empty field found at path \$.list", exception.message)
         }
     }
 
@@ -126,7 +126,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.fromJson("{\"collection\": []}")
             }
-            assertEquals("empty field found at path \$.collection", exception.message)
+            assertEquals("unexpected empty field found at path \$.collection", exception.message)
         }
 
         @Test
@@ -135,7 +135,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.toJson(NonEmptyCollection(collection = emptyList()))
             }
-            assertEquals("empty field found at path \$.collection", exception.message)
+            assertEquals("unexpected empty field found at path \$.collection", exception.message)
         }
     }
 
@@ -162,7 +162,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.fromJson("{\"map\": {}}")
             }
-            assertEquals("empty field found at path \$.map", exception.message)
+            assertEquals("unexpected empty field found at path \$.map", exception.message)
         }
 
         @Test
@@ -171,7 +171,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.toJson(NonEmptyMap(map = emptyMap()))
             }
-            assertEquals("empty field found at path \$.map", exception.message)
+            assertEquals("unexpected empty field found at path \$.map", exception.message)
         }
     }
 
@@ -198,7 +198,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.fromJson("{\"array\": []}")
             }
-            assertEquals("empty field found at path \$.array", exception.message)
+            assertEquals("unexpected empty field found at path \$.array", exception.message)
         }
 
         @Test
@@ -207,7 +207,7 @@ class NonEmptyJsonAdapter {
             val exception = assertThrows<IllegalArgumentException> {
                 adapter.toJson(NonEmptyArray(array = emptyArray()))
             }
-            assertEquals("empty field found at path \$.array", exception.message)
+            assertEquals("unexpected empty field found at path \$.array", exception.message)
         }
     }
 
