@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class NonEmptyJsonAdapter {
+class NonEmptyJsonAdapterTest {
 
     // Lazy adapters work only within the context of moshi.
     private val moshi = Moshi.Builder()
