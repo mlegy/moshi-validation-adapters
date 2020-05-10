@@ -23,14 +23,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveInt::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveInt::class.java)
             val toJson = adapter.toJson(NotInclusiveInt(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -40,8 +40,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -52,8 +52,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 100}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -64,8 +64,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveInt(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -76,8 +76,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveInt(value = 100))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -85,14 +85,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveInt::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveInt::class.java)
             val toJson = adapter.toJson(InclusiveInt(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -102,8 +102,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -114,8 +114,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(InclusiveInt(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -123,14 +123,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to serialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveInt::class.java)
             val toJson = adapter.toJson(InclusiveInt(value = 100))
-            assertEquals(toJson, "{\"value\":100}")
+            assertEquals("{\"value\":100}", toJson)
         }
 
         @Test
         fun `should be able to deserialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveInt::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 100}"))
-            assertEquals(fromJson.value, 100)
+            assertEquals(100, fromJson.value)
         }
     }
 
@@ -141,14 +141,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveByte::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveByte::class.java)
             val toJson = adapter.toJson(NotInclusiveByte(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -158,8 +158,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -170,8 +170,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 100}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -182,8 +182,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveByte(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -194,8 +194,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveByte(value = 100))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -203,14 +203,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveByte::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveByte::class.java)
             val toJson = adapter.toJson(InclusiveByte(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -220,8 +220,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -232,8 +232,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(InclusiveByte(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -241,14 +241,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to serialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveByte::class.java)
             val toJson = adapter.toJson(InclusiveByte(value = 100))
-            assertEquals(toJson, "{\"value\":100}")
+            assertEquals("{\"value\":100}", toJson)
         }
 
         @Test
         fun `should be able to deserialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveByte::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 100}"))
-            assertEquals(fromJson.value, 100)
+            assertEquals(100, fromJson.value)
         }
 
     }
@@ -260,14 +260,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveShort::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveShort::class.java)
             val toJson = adapter.toJson(NotInclusiveShort(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -277,8 +277,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -289,8 +289,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 100}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -301,8 +301,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveShort(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -313,8 +313,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveShort(value = 100))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -322,14 +322,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when inclusive`() {
             val adapter = moshi.adapter(NotInclusiveShort::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when inclusive`() {
             val adapter = moshi.adapter(NotInclusiveShort::class.java)
             val toJson = adapter.toJson(NotInclusiveShort(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -339,8 +339,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -351,8 +351,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(InclusiveShort(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -360,14 +360,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to serialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveShort::class.java)
             val toJson = adapter.toJson(InclusiveShort(value = 100))
-            assertEquals(toJson, "{\"value\":100}")
+            assertEquals("{\"value\":100}", toJson)
         }
 
         @Test
         fun `should be able to deserialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveShort::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 100}"))
-            assertEquals(fromJson.value, 100)
+            assertEquals(100, fromJson.value)
         }
 
     }
@@ -379,14 +379,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveLong::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when not inclusive`() {
             val adapter = moshi.adapter(NotInclusiveLong::class.java)
             val toJson = adapter.toJson(NotInclusiveLong(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -396,8 +396,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -408,8 +408,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 100}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -420,8 +420,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveLong(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -432,8 +432,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(NotInclusiveLong(value = 100))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 100"
+                "Invalid value at \$.value, Maximum value is 100 found 100",
+                exception.message
             )
         }
 
@@ -441,14 +441,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to deserialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveLong::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 99}"))
-            assertEquals(fromJson.value, 99)
+            assertEquals(99, fromJson.value)
         }
 
         @Test
         fun `should be able to serialize value below max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveLong::class.java)
             val toJson = adapter.toJson(InclusiveLong(value = 99))
-            assertEquals(toJson, "{\"value\":99}")
+            assertEquals("{\"value\":99}", toJson)
         }
 
         @Test
@@ -458,8 +458,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.fromJson("{\"value\": 101}")
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -470,8 +470,8 @@ class MaxDecimalJsonAdapterTest {
                 adapter.toJson(InclusiveShort(value = 101))
             }
             assertEquals(
-                exception.message,
-                "Invalid value at \$.value, Maximum value is 100 found 101"
+                "Invalid value at \$.value, Maximum value is 100 found 101",
+                exception.message
             )
         }
 
@@ -479,14 +479,14 @@ class MaxDecimalJsonAdapterTest {
         fun `should be able to serialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveShort::class.java)
             val toJson = adapter.toJson(InclusiveShort(value = 100))
-            assertEquals(toJson, "{\"value\":100}")
+            assertEquals("{\"value\":100}", toJson)
         }
 
         @Test
         fun `should be able to deserialize max value when inclusive`() {
             val adapter = moshi.adapter(InclusiveShort::class.java)
             val fromJson = requireNotNull(adapter.fromJson("{\"value\": 100}"))
-            assertEquals(fromJson.value, 100)
+            assertEquals(100, fromJson.value)
         }
     }
 

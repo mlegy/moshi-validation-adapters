@@ -4,7 +4,6 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonQualifier
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import java.lang.reflect.Type
 
 /**
  * Indicates that the annotated field may not contain any empty values.
@@ -28,27 +27,21 @@ annotation class NonEmpty {
         /**
          * Builds an adapter that can process types annotated with [NonEmpty]
          */
-        val ADAPTER_FACTORY = object : JsonAdapter.Factory {
-            override fun create(
-                type: Type,
-                annotations: Set<Annotation>,
-                moshi: Moshi
-            ): JsonAdapter<*>? {
-                val nextAnnotations =
-                    Types.nextAnnotations(annotations, NonEmpty::class.java) ?: return null
-                val rawType = Types.getRawType(type)
-                return if (isSupportedType(rawType)) {
-                    NonEmptyJsonAdapter<Any>(moshi.adapter(type, nextAnnotations))
-                } else {
-                    throw IllegalArgumentException(
-                        "Unsupported type annotated with @NonEmpty." +
-                                " Supported Type are: String, Array, Collection and Map. Found: $type"
-                    )
-                }
+        val ADAPTER_FACTORY = JsonAdapter.Factory { type, annotations, moshi ->
+            val nextAnnotations =
+                Types.nextAnnotations(annotations, NonEmpty::class.java) ?: return@Factory null
+            val rawType = Types.getRawType(type)
+            if (isSupportedType(rawType)) {
+                NonEmptyJsonAdapter<Any>(moshi.adapter(type, nextAnnotations))
+            } else {
+                throw IllegalArgumentException(
+                    "Unsupported type annotated with @NonEmpty." +
+                            " Supported Type are: String, Array, Collection and Map. Found: $type"
+                )
             }
         }
 
-        fun isSupportedType(clazz: Class<*>) = when {
+        private fun isSupportedType(clazz: Class<*>) = when {
             String::class.java.isAssignableFrom(clazz) -> true
             clazz.isArray -> true
             MutableCollection::class.java.isAssignableFrom(clazz) -> true

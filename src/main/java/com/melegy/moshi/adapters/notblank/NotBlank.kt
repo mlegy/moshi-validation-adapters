@@ -4,7 +4,6 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonQualifier
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import java.lang.reflect.Type
 
 /**
  * Indicates that the annotated field may not contain blank string.
@@ -28,22 +27,16 @@ annotation class NotBlank {
         /**
          * Builds an adapter that can process types annotated with [NotBlank]
          */
-        val ADAPTER_FACTORY = object : JsonAdapter.Factory {
-            override fun create(
-                type: Type,
-                annotations: Set<Annotation>,
-                moshi: Moshi
-            ): JsonAdapter<*>? {
-                val nextAnnotations =
-                    Types.nextAnnotations(annotations, NotBlank::class.java) ?: return null
-                val isString = String::class.java.isAssignableFrom(Types.getRawType(type))
-                if (isString) {
-                    return NotBlankJsonAdapter<String>(moshi.adapter(type, nextAnnotations))
-                } else {
-                    throw IllegalArgumentException(
-                        "Unsupported type annotated with @NotEmpty. Expected String found: $type"
-                    )
-                }
+        val ADAPTER_FACTORY = JsonAdapter.Factory { type, annotations, moshi ->
+            val nextAnnotations =
+                Types.nextAnnotations(annotations, NotBlank::class.java) ?: return@Factory null
+            val isString = String::class.java.isAssignableFrom(Types.getRawType(type))
+            if (isString) {
+                NotBlankJsonAdapter<String>(moshi.adapter(type, nextAnnotations))
+            } else {
+                throw IllegalArgumentException(
+                    "Unsupported type annotated with @NotEmpty. Expected String found: $type"
+                )
             }
         }
     }

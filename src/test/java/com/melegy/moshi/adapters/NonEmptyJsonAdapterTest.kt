@@ -22,29 +22,29 @@ class NonEmptyJsonAdapterTest {
         @Test
         fun `NonEmpty should be able to deserialize non empty strings`() {
             val adapter = moshi.adapter(NonEmptyString::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
-            assertEquals(nonEmpty.string, "test")
+            val fromJson = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
+            assertEquals("test", fromJson.string)
         }
 
         @Test
         fun `NonEmpty should be able to serialize non empty strings`() {
             val adapter = moshi.adapter(NonEmptyString::class.java)
-            val nonEmpty = requireNotNull(adapter.toJson(NonEmptyString(string = "test")))
-            assertEquals(nonEmpty, "{\"string\":\"test\"}")
+            val toJson = requireNotNull(adapter.toJson(NonEmptyString(string = "test")))
+            assertEquals("{\"string\":\"test\"}", toJson)
         }
 
         @Test
         fun `NonEmpty should be able to deserialize blank string`() {
             val adapter = moshi.adapter(NonEmptyString::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"string\": \" \"}"))
-            assertEquals(nonEmpty.string, " ")
+            val fromJson = requireNotNull(adapter.fromJson("{\"string\": \" \"}"))
+            assertEquals(" ", fromJson.string)
         }
 
         @Test
         fun `NonEmpty should be able to serialize blank string`() {
             val adapter = moshi.adapter(NonEmptyString::class.java)
-            val nonEmpty = requireNotNull(adapter.toJson(NonEmptyString(string = " ")))
-            assertEquals(nonEmpty, "{\"string\":\" \"}")
+            val toJson = requireNotNull(adapter.toJson(NonEmptyString(string = " ")))
+            assertEquals("{\"string\":\" \"}", toJson)
         }
 
         @Test
@@ -72,15 +72,15 @@ class NonEmptyJsonAdapterTest {
         @Test
         fun `NonEmpty should be able to deserialize non empty list`() {
             val adapter = moshi.adapter(NonEmptyList::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"list\": [1]}"))
-            assertEquals(nonEmpty.list, listOf(1))
+            val fromJson = requireNotNull(adapter.fromJson("{\"list\": [1]}"))
+            assertEquals(listOf(1), fromJson.list)
         }
 
         @Test
         fun `NonEmpty should be able to serialize non empty list`() {
             val adapter = moshi.adapter(NonEmptyList::class.java)
-            val nonEmpty = requireNotNull(adapter.toJson(NonEmptyList(list = listOf(1))))
-            assertEquals(nonEmpty, "{\"list\":[1]}")
+            val toJson = requireNotNull(adapter.toJson(NonEmptyList(list = listOf(1))))
+            assertEquals("{\"list\":[1]}", toJson)
         }
 
         @Test
@@ -108,16 +108,16 @@ class NonEmptyJsonAdapterTest {
         @Test
         fun `NonEmpty should be able to deserialize non empty collection`() {
             val adapter = moshi.adapter(NonEmptyCollection::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"collection\": [1]}"))
-            assertEquals(nonEmpty.collection, listOf(1))
+            val fromJson = requireNotNull(adapter.fromJson("{\"collection\": [1]}"))
+            assertEquals(listOf(1), fromJson.collection)
         }
 
         @Test
         fun `NonEmpty should be able to serialize non empty collection`() {
             val adapter = moshi.adapter(NonEmptyCollection::class.java)
-            val nonEmpty =
+            val toJson =
                 requireNotNull(adapter.toJson(NonEmptyCollection(collection = listOf(1))))
-            assertEquals(nonEmpty, "{\"collection\":[1]}")
+            assertEquals("{\"collection\":[1]}", toJson)
         }
 
         @Test
@@ -145,15 +145,15 @@ class NonEmptyJsonAdapterTest {
         @Test
         fun `NonEmpty should be able to deserialize non empty map`() {
             val adapter = moshi.adapter(NonEmptyMap::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"map\": {\"one\": 1}}"))
-            assertEquals(nonEmpty.map, mapOf("one" to 1))
+            val fromJson = requireNotNull(adapter.fromJson("{\"map\": {\"one\": 1}}"))
+            assertEquals(mapOf("one" to 1), fromJson.map)
         }
 
         @Test
         fun `NonEmpty should be able to serialize non empty map`() {
             val adapter = moshi.adapter(NonEmptyMap::class.java)
-            val nonEmpty = requireNotNull(adapter.toJson(NonEmptyMap(map = mapOf("one" to 1))))
-            assertEquals(nonEmpty, "{\"map\":{\"one\":1}}")
+            val toJson = requireNotNull(adapter.toJson(NonEmptyMap(map = mapOf("one" to 1))))
+            assertEquals("{\"map\":{\"one\":1}}", toJson)
         }
 
         @Test
@@ -181,15 +181,15 @@ class NonEmptyJsonAdapterTest {
         @Test
         fun `NonEmpty should be able to deserialize non empty array`() {
             val adapter = moshi.adapter(NonEmptyArray::class.java)
-            val nonEmpty = requireNotNull(adapter.fromJson("{\"array\": [1]}"))
-            assertArrayEquals(nonEmpty.array, arrayOf(1))
+            val fromJson = requireNotNull(adapter.fromJson("{\"array\": [1]}"))
+            assertArrayEquals(arrayOf(1), fromJson.array)
         }
 
         @Test
         fun `NonEmpty should be able to serialize non empty array`() {
             val adapter = moshi.adapter(NonEmptyArray::class.java)
-            val nonEmpty = requireNotNull(adapter.toJson(NonEmptyArray(array = arrayOf(1))))
-            assertEquals(nonEmpty, "{\"array\":[1]}")
+            val toJson = requireNotNull(adapter.toJson(NonEmptyArray(array = arrayOf(1))))
+            assertEquals("{\"array\":[1]}", toJson)
         }
 
         @Test
@@ -222,15 +222,15 @@ class NonEmptyJsonAdapterTest {
     @Test
     fun `toString() should reflects InnerAdapter`() {
         val adapter = moshi.adapter<NonEmpty>(String::class.java, NonEmpty::class.java)
-        assertEquals(adapter.toString(), "JsonAdapter(String).nullSafe().NonEmpty()")
+        assertEquals("JsonAdapter(String).nullSafe().NonEmpty()", adapter.toString())
     }
 
     @Test
     fun `factory should maintains other annotations`() {
         val adapter = moshi.adapter(NonEmptyPlusMoshi::class.java)
-        val model = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
-        assertEquals(model.string, "testMoshi")
-        assertEquals(adapter.toJson(model), "{\"string\":\"test\"}")
+        val fromJson = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
+        assertEquals("testMoshi", fromJson.string)
+        assertEquals("{\"string\":\"test\"}", adapter.toJson(fromJson))
     }
 
     companion object {

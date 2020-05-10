@@ -18,15 +18,15 @@ class NotBlankJsonAdapterTest {
     @Test
     fun `NonBlank should be able to deserialize non blank strings`() {
         val adapter = moshi.adapter(NotBlankString::class.java)
-        val nonEmpty = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
-        assertEquals(nonEmpty.string, "test")
+        val fromJson = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
+        assertEquals("test", fromJson.string)
     }
 
     @Test
     fun `NonBlank should be able to serialize non blank strings`() {
         val adapter = moshi.adapter(NotBlankString::class.java)
-        val nonEmpty = requireNotNull(adapter.toJson(NotBlankString(string = "test")))
-        assertEquals(nonEmpty, "{\"string\":\"test\"}")
+        val toJson = requireNotNull(adapter.toJson(NotBlankString(string = "test")))
+        assertEquals("{\"string\":\"test\"}", toJson)
     }
 
     @Test
@@ -50,15 +50,15 @@ class NotBlankJsonAdapterTest {
     @Test
     fun `toString() should reflects InnerAdapter`() {
         val adapter = moshi.adapter<NotBlank>(String::class.java, NotBlank::class.java)
-        assertEquals(adapter.toString(), "JsonAdapter(String).nullSafe().NotBlank()")
+        assertEquals("JsonAdapter(String).nullSafe().NotBlank()", adapter.toString())
     }
 
     @Test
     fun `factory should maintains other annotations`() {
         val adapter = moshi.adapter(NonBlankPlusMoshi::class.java)
-        val model = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
-        assertEquals(model.string, "testMoshi")
-        assertEquals(adapter.toJson(model), "{\"string\":\"test\"}")
+        val fromJson = requireNotNull(adapter.fromJson("{\"string\": \"test\"}"))
+        assertEquals("testMoshi", fromJson.string)
+        assertEquals("{\"string\":\"test\"}", adapter.toJson(fromJson))
     }
 
     companion object {
