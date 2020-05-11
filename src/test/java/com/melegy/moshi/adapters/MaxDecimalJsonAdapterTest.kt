@@ -1,6 +1,7 @@
 package com.melegy.moshi.adapters
 
 import com.melegy.moshi.adapters.decimalmax.DecimalMax
+import com.melegy.moshi.adapters.utils.DoubleValue
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.*
@@ -13,7 +14,7 @@ class MaxDecimalJsonAdapterTest {
     // Lazy adapters work only within the context of moshi.
     private val moshi = Moshi.Builder()
         .add(DecimalMax.ADAPTER_FACTORY)
-        .add(PlusMoshi)
+        .add(DoubleValue)
         .build()
 
     @Nested
@@ -490,6 +491,13 @@ class MaxDecimalJsonAdapterTest {
         }
     }
 
+    @Test
+    fun `factory should maintain other annotations`() {
+        val adapter = moshi.adapter(Double::class.java)
+        val fromJson = requireNotNull(adapter.fromJson("{\"value\": 1}"))
+        assertEquals(2, fromJson.value)
+        assertEquals("{\"value\":\"1\"}", adapter.toJson(fromJson))
+    }
 
     companion object {
         @JsonClass(generateAdapter = true)
@@ -515,5 +523,11 @@ class MaxDecimalJsonAdapterTest {
 
         @JsonClass(generateAdapter = true)
         data class InclusiveLong(@DecimalMax(value = "100", inclusive = true) val value: Long)
+
+        @JsonClass(generateAdapter = true)
+        data class Double(
+            @DecimalMax(value = "100", inclusive = true)
+            @DoubleValue val value: Int
+        )
     }
 }

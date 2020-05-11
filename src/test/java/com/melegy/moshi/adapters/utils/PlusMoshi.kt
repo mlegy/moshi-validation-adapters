@@ -1,4 +1,4 @@
-package com.melegy.moshi.adapters
+package com.melegy.moshi.adapters.utils
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonQualifier

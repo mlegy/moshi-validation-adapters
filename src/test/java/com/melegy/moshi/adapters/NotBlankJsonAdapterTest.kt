@@ -1,6 +1,7 @@
 package com.melegy.moshi.adapters
 
 import com.melegy.moshi.adapters.notblank.NotBlank
+import com.melegy.moshi.adapters.utils.PlusMoshi
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.assertEquals
