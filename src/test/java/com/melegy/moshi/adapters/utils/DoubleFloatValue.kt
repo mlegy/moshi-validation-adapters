@@ -9,20 +9,20 @@ import com.squareup.moshi.ToJson
  */
 @JsonQualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DoubleValue {
+annotation class DoubleFloatValue {
     /**
-     * String adapter, that will append double the int value on read, and divide it back on write.
+     * String adapter, that will append double the float value on read, and divide it back on write.
      */
     companion object {
-        @DoubleValue
+        @DoubleFloatValue
         @FromJson
-        fun fromJson(str: String): Int {
-            return str.toInt() * 2
+        fun fromJson(str: String): Float {
+            return str.toFloat() * 2
         }
 
         @ToJson
-        fun toJson(@DoubleValue str: Int): String {
-            return (str / 2).toString()
+        fun toJson(@DoubleFloatValue value: Float): String {
+            return (value / 2).toString()
         }
     }
 }

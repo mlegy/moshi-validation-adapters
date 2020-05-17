@@ -1,7 +1,7 @@
 package com.melegy.moshi.adapters
 
 import com.melegy.moshi.adapters.decimalmin.DecimalMin
-import com.melegy.moshi.adapters.utils.DoubleValue
+import com.melegy.moshi.adapters.utils.DoubleIntValue
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.*
@@ -14,7 +14,7 @@ class MinDecimalJsonAdapterTest {
     // Lazy adapters work only within the context of moshi.
     private val moshi = Moshi.Builder()
         .add(DecimalMin.ADAPTER_FACTORY)
-        .add(DoubleValue)
+        .add(DoubleIntValue)
         .build()
 
     @Nested
@@ -527,7 +527,7 @@ class MinDecimalJsonAdapterTest {
         @JsonClass(generateAdapter = true)
         data class Double(
             @DecimalMin(value = "1", inclusive = true)
-            @DoubleValue val value: Int
+            @DoubleIntValue val value: Int
         )
     }
 }
