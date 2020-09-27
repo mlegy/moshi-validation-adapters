@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 
 /**
- * [JsonAdapter] that will not serialize `T` when the passed value is empty.
+ * [JsonAdapter] that will not serialize `T` when the passed value is False.
  */
 class AssertFalseJsonAdapter<T>(private val delegate: JsonAdapter<T>) : JsonAdapter<T>() {
     override fun fromJson(reader: JsonReader): T? {

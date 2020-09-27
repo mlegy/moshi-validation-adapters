@@ -93,3 +93,11 @@ Checks whether the annotated value is larger than the specified minimum, when  `
 		@AssertFalse val b: Boolean
 		```
 ---
+- `@AssertTrue`
+	- Checks that the annotated element is `true`.
+	- **Supported data types**: `Boolean`.
+	- **Example**:
+		```kotlin
+		@AssertTrue val b: Boolean
+		```
+---

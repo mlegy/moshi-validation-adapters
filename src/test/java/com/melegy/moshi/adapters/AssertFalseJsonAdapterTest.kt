@@ -1,7 +1,7 @@
 package com.melegy.moshi.adapters
 
 import com.melegy.moshi.adapters.assertFalse.AssertFalse
-import com.melegy.moshi.adapters.utils.InvertBoolean
+import com.melegy.moshi.adapters.utils.StringBoolean
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,7 +13,7 @@ class AssertFalseJsonAdapterTest {
     // Lazy adapters work only within the context of moshi.
     private val moshi = Moshi.Builder()
         .add(AssertFalse.ADAPTER_FACTORY)
-        .add(InvertBoolean)
+        .add(StringBoolean)
         .build()
 
     @Test
@@ -58,8 +58,8 @@ class AssertFalseJsonAdapterTest {
     fun `factory should maintains other annotations`() {
         val adapter = moshi.adapter(DataInvert::class.java)
         val fromJson = requireNotNull(adapter.fromJson("{\"value\":false}"))
-        assertEquals(true, fromJson.value)
-        assertEquals("{\"value\":false}", adapter.toJson(fromJson))
+        assertEquals(false, fromJson.value)
+        assertEquals("{\"value\":\"false\"}", adapter.toJson(fromJson))
     }
 
     companion object {
@@ -67,6 +67,6 @@ class AssertFalseJsonAdapterTest {
         data class Data(@AssertFalse val value: Boolean)
 
         @JsonClass(generateAdapter = true)
-        data class DataInvert( @InvertBoolean val value: Boolean)
+        data class DataInvert(@AssertFalse @StringBoolean val value: Boolean)
     }
 }

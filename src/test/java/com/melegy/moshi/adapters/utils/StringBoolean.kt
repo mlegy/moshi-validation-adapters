@@ -9,17 +9,17 @@ import com.squareup.moshi.ToJson
  */
 @JsonQualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class InvertBoolean {
+annotation class StringBoolean {
     /**
      * Boolean adapter, that will invert value on read and write.
      */
     companion object {
-        @InvertBoolean
+        @StringBoolean
         @FromJson
-        fun fromJson(b: Boolean) = b.not()
+        fun fromJson(b: Boolean) = b
 
 
         @ToJson
-        fun toJson(@InvertBoolean b: Boolean) = b.not()
+        fun toJson(@StringBoolean b: Boolean) = b.toString()
     }
 }
