@@ -11,7 +11,7 @@ import com.squareup.moshi.ToJson
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DoubleFloatValue {
     /**
-     * String adapter, that will append double the float value on read, and divide it back on write.
+     * Float adapter, that will append double the float value on read, and divide it back on write.
      */
     companion object {
         @DoubleFloatValue

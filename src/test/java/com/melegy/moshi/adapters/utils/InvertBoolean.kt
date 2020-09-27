@@ -9,20 +9,17 @@ import com.squareup.moshi.ToJson
  */
 @JsonQualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DoubleIntValue {
+annotation class InvertBoolean {
     /**
-     * Double adapter, that will append double the int value on read, and divide it back on write.
+     * Boolean adapter, that will invert value on read and write.
      */
     companion object {
-        @DoubleIntValue
+        @InvertBoolean
         @FromJson
-        fun fromJson(str: String): Int {
-            return str.toInt() * 2
-        }
+        fun fromJson(b: Boolean) = b.not()
+
 
         @ToJson
-        fun toJson(@DoubleIntValue str: Int): String {
-            return (str / 2).toString()
-        }
+        fun toJson(@InvertBoolean b: Boolean) = b.not()
     }
 }

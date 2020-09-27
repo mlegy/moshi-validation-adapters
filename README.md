@@ -85,3 +85,11 @@ Checks whether the annotated value is larger than the specified minimum, when  `
 		@NotBlank val string: String
 		```
 ---
+- `@AssertFalse`
+	- Checks that the annotated element is `false`.
+	- **Supported data types**: `Boolean`.
+	- **Example**:
+		```kotlin
+		@AssertFalse val b: Boolean
+		```
+---
