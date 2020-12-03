@@ -1,6 +1,9 @@
 
 # Moshi Validation Adapters
 
+> :heavy_exclamation_mark: **_Not released yet_**
+
+
 A collection of simple JsonAdapters for [Moshi](https://github.com/square/moshi).
  
 This library acts as an extension to Moshi by providing general purpose, yet useful `JsonAdapter`s that are not present in the main library. Most provided adapters are linked via specialized `JsonQualifier` annotations that alter serialization/deserialization strategies.
